@@ -5,22 +5,20 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function App() {
   return (
     <Router>
-      <div>
-        <div className="bg-indigo-200 shadow-md">
-          <Link className="underline" to="/">
-            Directory Viewer
-          </Link>
-        </div>
-
-        <Switch>
-          <Route path="/teleport">
-            <Teleport />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+      <div className="bg-indigo-200 shadow-md">
+        <Link className="underline" to="/">
+          Directory Viewer
+        </Link>
       </div>
+
+      <Switch>
+        <Route path="/teleport">
+          <Teleport />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
     </Router>
   );
 }
