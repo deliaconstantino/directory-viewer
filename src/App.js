@@ -1,7 +1,5 @@
 function App() {
-  return (
-    <div>Directory Viewer</div>
-  );
+  return <div>Directory Viewer</div>;
 }
 
 export default App;
