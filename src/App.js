@@ -7,7 +7,9 @@ function App() {
     <Router>
       <div>
         <div className="bg-indigo-200 shadow-md">
-          <Link to="/">Directory Viewer</Link>
+          <Link className="underline" to="/">
+            Directory Viewer
+          </Link>
         </div>
 
         <Switch>
