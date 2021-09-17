@@ -1,16 +1,7 @@
-import { Link } from "react-router-dom";
-import { directory } from "../../data/directory.js";
-
+import DataFinder from "../../components/DataFinder.js";
 
 function Home() {
-  return (
-    <div>
-      {/* <Link className="underline" to="/teleport"> */}
-      {/* <Link className="underline" to={`${directory.name}`}>
-        Teleport
-      </Link> */}
-    </div>
-  );
+  return <DataFinder />;
 }
 
 export default Home;
