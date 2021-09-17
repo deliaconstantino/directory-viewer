@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { directory } from "../data/directory.js";
 import { Link, useRouteMatch } from "react-router-dom";
-import Directory from "../pages/teleport/Directory.js";
+import Page from "../pages/page/Page.js";
 
 function searchDirectory(urlArray) {
   //TODO: add check that this value exists in this directory
@@ -31,10 +31,10 @@ function DataFinder() {
     setData(searchDirectory(filteredUrl));
   }, [data]);
 
+  // console.log("type", data?.type);
   return (
     <div>
-      datafinder
-      <Directory data={data} />
+      <Page data={data} />
     </div>
   );
 }
