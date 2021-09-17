@@ -1,17 +1,9 @@
 import Teleport from "./pages/page/Teleport.js";
 import Home from "./pages/home/Home.js";
 import Page from "./pages/page/Page.js";
-import DataFinder from "./components/DataFinder.js"
+import DataFinder from "./components/DataFinder.js";
 import { directory } from "./data/directory.js";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  // Redirect,
-  // useParams,
-  // useRouteMatch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
   return (
@@ -28,13 +20,9 @@ function App() {
       <Switch>
         <Route path="/:path">
           <DataFinder />
-          {/* <Directory data={directory} /> */}
         </Route>
-        {/* <Route path="/teleport">
-          <Teleport />
-        </Route> */}
         <Route path="/">
-          {/* <Home /> */}
+          <Home />
         </Route>
       </Switch>
     </Router>
