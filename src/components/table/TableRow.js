@@ -8,11 +8,20 @@ function TableRow({ type, name, size, items }) {
 
   let nameValue;
   if (type === "dir") {
-    nameValue =  (
-      <div>
-        <Link to={`${url}${name}`}>{name}</Link>
-      </div>
-    )
+    console.log("tablerow", url)
+    if (url.startsWith("/teleport")) {
+      nameValue =  (
+        <div>
+          <Link to={`${url}/${name}`}>{name}</Link>
+        </div>
+      )
+    } else {
+      nameValue =  (
+        <div>
+          <Link to={`${url}${name}`}>{name}</Link>
+        </div>
+      )
+    }
   } else {
     nameValue = name
   }
