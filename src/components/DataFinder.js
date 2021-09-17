@@ -6,9 +6,17 @@ import Page from "../pages/page/Page.js";
 function searchDirectory(urlArray) {
   //TODO: add check that this value exists in this directory
   let parentLevel = directory;
+  console.log(urlArray);
+
+  if (urlArray.length === 0) {
+    return parentLevel;
+  }
 
   if (urlArray.length === 1) {
-    return parentLevel;
+    console.log("ua", urlArray[0])
+    parentLevel = parentLevel.items;
+    console.log("parentLevel", parentLevel)
+    return parentLevel
   }
 
   for (let i = 0; i < urlArray.length; i++) {
