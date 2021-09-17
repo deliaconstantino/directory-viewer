@@ -1,19 +1,18 @@
-function Table () {
+import TableRow from "./TableRow";
+
+function Table({ name, size, type }) {
   return (
     <table className="">
       <thead>
         <tr>
           <th className=""></th>
           <th className="">Name</th>
-          <th className="">Size</th>
+          <th className="">SizeKb</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td className="">file</td>
-          <td className="">Indiana</td>
-          <td className="">25</td>
-        </tr>
+
+        <TableRow name={name} size={size} type={type} />
         <tr>
           <td className="">file</td>
           <td className="">Ohio</td>
@@ -26,7 +25,7 @@ function Table () {
         </tr>
       </tbody>
     </table>
-  )
+  );
 }
 
 export default Table;
