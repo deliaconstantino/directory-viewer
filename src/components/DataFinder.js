@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
 import { directory } from "../data/directory.js";
 import { Link, useRouteMatch } from "react-router-dom";
 import Directory from "../pages/teleport/Directory.js";
 
 function searchDirectory(urlArray) {
-  //TODO: add check that this value exists in data
+  //TODO: add check that this value exists in this directory
   let parentLevel = directory;
 
   if (urlArray.length === 1) {
@@ -21,15 +22,19 @@ function searchDirectory(urlArray) {
 }
 
 function DataFinder() {
+  const [data, setData] = useState(null);
+
   let { url } = useRouteMatch();
   let filteredUrl = url.split("/").filter(Boolean);
-  console.log("u", filteredUrl);
-  const parentData = searchDirectory(filteredUrl);
-  console.log("parentData", parentData);
+
+  useEffect(() => {
+    setData(searchDirectory(filteredUrl));
+  }, [data]);
+
   return (
     <div>
       datafinder
-      <Directory data={parentData} />
+      <Directory data={data} />
     </div>
   );
 }
