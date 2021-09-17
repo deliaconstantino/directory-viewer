@@ -13,10 +13,10 @@ function searchDirectory(urlArray) {
   }
 
   if (urlArray.length === 1) {
-    console.log("ua", urlArray[0])
+    console.log("ua", urlArray[0]);
     parentLevel = parentLevel.items;
-    console.log("parentLevel", parentLevel)
-    return parentLevel
+    console.log("parentLevel", parentLevel);
+    return parentLevel;
   }
 
   for (let i = 0; i < urlArray.length; i++) {
@@ -39,10 +39,16 @@ function DataFinder() {
     setData(searchDirectory(filteredUrl));
   }, [data]);
 
-  // console.log("type", data?.type);
+  let tableData = new Array();
+  if (data && data.length) {
+    tableData = data;
+  } else {
+    tableData.push(data);
+  }
+
   return (
     <div>
-      <Page data={data} />
+      <Page data={tableData} />
     </div>
   );
 }
