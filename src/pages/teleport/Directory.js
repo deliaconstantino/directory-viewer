@@ -1,16 +1,9 @@
 import Table from "../../components/table/Table.js";
 import { directory } from "../../data/directory.js";
-import {
-  Link,
-  useRouteMatch,
-} from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
-
-// function find(name) {
-//   return directory.find((entry) => entry.name === name);
-// }
-
-function Directory() {
+function Directory({ data }) {
+  console.log("data", data);
   let { url } = useRouteMatch();
 
   let entry = directory.name;
@@ -29,15 +22,7 @@ function Directory() {
     <div>
       <h3>{entry}</h3>
 
-      <ul>
-        {listItems}
-      </ul>
-
-      {/* <Switch>
-        <Route path={`${url}/:id`}>
-          <Directory />
-        </Route>
-      </Switch> */}
+      <ul>{listItems}</ul>
     </div>
   );
 }
