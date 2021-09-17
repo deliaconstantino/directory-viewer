@@ -6,8 +6,6 @@ function Page({ data }) {
   console.log("data", data);
   let { url } = useRouteMatch();
 
-  let entry = directory.name;
-
   const listItems = directory?.items?.map((val, idx) => {
     console.log("i", idx, "current value", val);
 
@@ -20,8 +18,6 @@ function Page({ data }) {
 
   return (
     <div>
-      <h3>{entry}</h3>
-
       <ul>{listItems}</ul>
     </div>
   );
