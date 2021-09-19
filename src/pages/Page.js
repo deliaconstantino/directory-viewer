@@ -1,5 +1,5 @@
-import Table from "../../components/table/Table.js";
-import BreadCrumbs from "./components/BreadCrumbs.js";
+import Table from "../components/table/Table.js";
+import BreadCrumbs from "../components/BreadCrumbs.js";
 
 function Page({ data, location }) {
   return (
