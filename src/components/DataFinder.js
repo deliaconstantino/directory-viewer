@@ -10,9 +10,9 @@ function DataFinder() {
 
   useEffect(() => {
     setData(searchDirectory(filteredUrl));
-  });
+  }, [filteredUrl]);
 
-  let tableData = new Array();
+  let tableData = [];
   if (data && data.length) {
     tableData = data;
   } else {
