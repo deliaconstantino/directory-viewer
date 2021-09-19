@@ -6,9 +6,6 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/directory/:id">
-          <DataFinder/>
-        </Route>
         <Route path="/directory">
           <DataFinder/>
         </Route>
