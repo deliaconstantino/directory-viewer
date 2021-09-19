@@ -24,7 +24,7 @@ export const directory = {
                   type: "file",
                 },
                 {
-                  name: "sample4.go",
+                  name: "sample4.gohellohowareyoucheckinghowthisrenderswhenitslong",
                   sizeKb: 3320,
                   type: "file",
                 },
