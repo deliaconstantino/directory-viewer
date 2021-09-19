@@ -9,9 +9,33 @@ export const directory = {
       type: "dir",
       items: [
         {
-          name: "teleport.go",
+          name: "newTeleport",
           sizeKb: 320,
-          type: "file",
+          type: "dir",
+          items: [
+            {
+              name: "sampleDir",
+              sizeKb: 320,
+              type: "dir",
+              items: [
+                {
+                  name: "cool.go",
+                  sizeKb: 320,
+                  type: "file",
+                },
+                {
+                  name: "sample4.go",
+                  sizeKb: 3320,
+                  type: "file",
+                },
+              ],
+            },
+            {
+              name: "another.go",
+              sizeKb: 3320,
+              type: "file",
+            },
+          ],
         },
         {
           name: "test.go",
