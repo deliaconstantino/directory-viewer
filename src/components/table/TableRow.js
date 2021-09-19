@@ -1,29 +1,15 @@
-import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
-import DataFinder from "../DataFinder.js"
+import { Link } from "react-router-dom";
 
-function TableRow({ type, name, size, items }) {
-  let { url } = useRouteMatch()
-  console.log("row", type, name, size, items)
-  console.log(url)
-
+function TableRow({ type, name, size, items, location }) {
   let nameValue;
   if (type === "dir") {
-    console.log("tablerow", url)
-    if (url.startsWith("/teleport")) {
-      nameValue =  (
-        <div>
-          <Link to={`${url}/${name}`}>{name}</Link>
-        </div>
-      )
-    } else {
-      nameValue =  (
-        <div>
-          <Link to={`${url}${name}`}>{name}</Link>
-        </div>
-      )
-    }
+    nameValue = (
+      <div>
+        <Link to={`${location.pathname}/${name}`}>{name}</Link>
+      </div>
+    );
   } else {
-    nameValue = name
+    nameValue = name;
   }
 
   return (
