@@ -1,5 +1,4 @@
 import DataFinder from "./components/DataFinder.js";
-import { directory } from "./data/directory.js";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
