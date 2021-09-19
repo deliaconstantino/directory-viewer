@@ -5,7 +5,7 @@ function TableRow({ type, name, size, items, location }) {
   let imageSVG;
   if (type === "dir") {
     nameValue = (
-      <div>
+      <div className="text-blue-500 underline">
         <Link to={`${location.pathname}/${name}`}>{name}</Link>
       </div>
     );
@@ -48,7 +48,7 @@ function TableRow({ type, name, size, items, location }) {
         {nameValue}
       </td>
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        {size}
+        {size ? size : "-"}
       </td>
     </tr>
   );
