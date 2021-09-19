@@ -3,7 +3,7 @@ import BreadCrumbs from "../components/BreadCrumbs.js";
 
 function Page({ data, location }) {
   return (
-    <div>
+    <div className="m-10">
       <BreadCrumbs />
       <p>search box here</p>
       <Table data={data} location={location} />
