@@ -1,29 +1,26 @@
 import { useEffect, useState } from "react";
 import { directory } from "../data/directory.js";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Page from "../pages/page/Page.js";
 
 function searchDirectory(urlArray) {
   //TODO: add check that this value exists in this directory
   let parentLevel = directory;
-  console.log(urlArray);
-
-  if (urlArray.length === 0) {
-    return parentLevel;
-  }
+  console.log("urlArray", urlArray);
 
   if (urlArray.length === 1) {
-    console.log("ua", urlArray[0]);
-    parentLevel = parentLevel.items;
-    console.log("parentLevel", parentLevel);
     return parentLevel;
   }
 
-  for (let i = 0; i < urlArray.length; i++) {
-    let foundIdx = parentLevel.items.findIndex(
-      (val) => val.name === urlArray[i]
-    );
-    parentLevel = parentLevel.items[foundIdx];
+  parentLevel = parentLevel.items;
+
+  if (urlArray.length === 2) {
+    return parentLevel;
+  }
+
+  for (let i = 2; i < urlArray.length; i++) {
+    let foundIdx = parentLevel.findIndex((val) => val.name === urlArray[i]);
+    parentLevel = parentLevel[foundIdx].items;
   }
 
   return parentLevel;
@@ -31,13 +28,12 @@ function searchDirectory(urlArray) {
 
 function DataFinder() {
   const [data, setData] = useState(null);
-
-  let { url } = useRouteMatch();
-  let filteredUrl = url.split("/").filter(Boolean);
+  let location = useLocation();
+  let filteredUrl = location.pathname.split("/").filter(Boolean);
 
   useEffect(() => {
     setData(searchDirectory(filteredUrl));
-  }, [data]);
+  });
 
   let tableData = new Array();
   if (data && data.length) {
@@ -48,7 +44,7 @@ function DataFinder() {
 
   return (
     <div>
-      <Page data={tableData} />
+      <Page data={tableData} location={location} />
     </div>
   );
 }
