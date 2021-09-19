@@ -1,6 +1,6 @@
 import TableRow from "./TableRow";
 
-function Table({ data }) {
+function Table({ data, location }) {
   return (
     <table className="">
       <thead>
@@ -11,14 +11,18 @@ function Table({ data }) {
         </tr>
       </thead>
       <tbody>
-        {data && (
-          <TableRow
-            name={data.name}
-            size={data.sizeKb}
-            type={data.type}
-            items={data?.items}
-          />
-        )}
+        {data[0] &&
+          data.map((d, idx) => {
+            return (
+              <TableRow key={idx}
+                name={d.name}
+                size={d.sizeKb}
+                type={d.type}
+                items={d?.items}
+                location={location}
+              />
+            );
+          })}
       </tbody>
     </table>
   );
