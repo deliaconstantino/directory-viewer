@@ -3,7 +3,6 @@ import { directory } from "../data/directory.js";
 export function searchDirectory(urlArray) {
   //TODO: add check that this value exists in this directory
   let parentLevel = directory;
-  console.log("urlArray", urlArray);
 
   if (urlArray.length === 1) {
     return parentLevel;
