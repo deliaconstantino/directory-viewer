@@ -13,9 +13,9 @@ export function searchDirectory(urlArray) {
     return parentLevel;
   }
 
-  let foundIdx;
   for (let i = 2; i < urlArray.length; i++) {
-    foundIdx = parentLevel.findIndex((val) => val.name === urlArray[i]);
+    const foundIdx = parentLevel.findIndex((val) => val.name === urlArray[i]);
+
     if (foundIdx > -1) {
       parentLevel = parentLevel[foundIdx].items;
     } else {
