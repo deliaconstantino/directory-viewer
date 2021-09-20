@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 
 function App() {
   return (
-    <div>
-      <h1>
+    <div className="container mx-auto m-10">
+      <h1 className="font-bold text-3xl text-gray-700">
         Directory Viewer
       </h1>
       <Router>

@@ -1,6 +1,8 @@
 import { directory } from "../data/directory.js";
 
 export function searchDirectory(urlArray) {
+    //TODO: add check that this value exists in this directory
+  // if (urlArray[0] !== "directory") return false;
   let parentLevel = directory;
   if (urlArray.length === 1) {
     return parentLevel;

@@ -1,7 +1,5 @@
 function BreadCrumbs() {
-  return (
-    <p> /breadcrumbs...</p>
-  )
+  return null;
 };
 
 export default BreadCrumbs;
