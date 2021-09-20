@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function TableRow({ type, name, size, items, location }) {
+function TableRow({ type, name, size, location }) {
   let nameValue;
   let imageSVG;
   if (type === "dir") {
@@ -12,6 +12,7 @@ function TableRow({ type, name, size, items, location }) {
 
     imageSVG = (
       <svg
+        title="folderIcon"
         xmlns="http://www.w3.org/2000/svg"
         width="18"
         height="18"
@@ -27,6 +28,7 @@ function TableRow({ type, name, size, items, location }) {
 
     imageSVG = (
       <svg
+        title="fileIcon"
         xmlns="http://www.w3.org/2000/svg"
         width="18"
         height="18"
