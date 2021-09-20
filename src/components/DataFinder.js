@@ -5,11 +5,19 @@ import Page from "../pages/Page.js";
 
 function DataFinder() {
   const [data, setData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(false);
   let location = useLocation();
   let filteredUrl = location.pathname.split("/").filter(Boolean);
 
   useEffect(() => {
-    setData(searchDirectory(filteredUrl));
+    const searchReturn = searchDirectory(filteredUrl);
+    if (searchReturn) {
+      setData(searchReturn);
+      setErrorMessage(false);
+    } else {
+      setData(null);
+      setErrorMessage(true);
+    }
   }, [filteredUrl]);
 
   let tableData = [];
@@ -21,7 +29,7 @@ function DataFinder() {
 
   return (
     <div>
-      <Page data={tableData} location={location} />
+      <Page data={tableData} location={location} errorMessage={errorMessage} />
     </div>
   );
 }
