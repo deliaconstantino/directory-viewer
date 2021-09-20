@@ -1,4 +1,4 @@
-import { render, act, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import TableRow from "./TableRow";
 
@@ -67,7 +67,49 @@ describe("TableRow Conponent", () => {
     expect(svgTitle).toBeTruthy();
   });
 
-  //TODO:
-  //test that dir name renders as link with href of the expected link value
-  //test that file name renders as string
+  it("renders a link for name value when type is directory", () => {
+    const { getByRole } = render(
+      <MemoryRouter initialEntries={["/directory"]}>
+        <TableRow
+          type="dir"
+          name="teleport"
+          size={123}
+          location={{ pathname: "/directory" }}
+        />
+      </MemoryRouter>,
+      containerValue
+    );
+    const teleportLink = getByRole("link");
+
+    expect(teleportLink).toHaveAttribute("href", "/directory/teleport");
+  });
+
+  it("renders a correct longer link for name value when type is directory", () => {
+    const { getByRole } = render(
+      <MemoryRouter initialEntries={["/directory"]}>
+        <TableRow
+          type="dir"
+          name="newTeleport"
+          size={123}
+          location={{ pathname: "/directory/teleport/lib" }}
+        />
+      </MemoryRouter>,
+      containerValue
+    );
+    const newTeleportLink = getByRole("link");
+
+    expect(newTeleportLink).toHaveAttribute(
+      "href",
+      "/directory/teleport/lib/newTeleport"
+    );
+  });
+
+  it("does not render link for type file", () => {
+    const { queryByRole } = render(
+      <TableRow type="file" name="teleport" size={0} />,
+      containerValue
+    );
+    const linkValue = queryByRole("link");
+    expect(linkValue).toBeNull();
+  });
 });

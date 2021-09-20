@@ -8,7 +8,7 @@ const tableData = [
 ];
 
 const locale = {
-  location: { pathname: "/directory/teleport/lib/newTeleport" },
+  location: { pathname: "/directory/teleport/lib" },
 };
 
 describe("Table Component", () => {
@@ -19,7 +19,7 @@ describe("Table Component", () => {
 
   it("renders the correct amount of table rows", () => {
     const { getAllByTestId } = render(
-      <MemoryRouter initialEntries={["/directory/teleport/lib/newTeleport"]}>
+      <MemoryRouter initialEntries={["/directory/teleport/lib"]}>
         <Table data={tableData} location={locale} />
       </MemoryRouter>
     );
