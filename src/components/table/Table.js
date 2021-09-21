@@ -7,7 +7,7 @@ import { sortBy } from "../../lib/sortBy.js";
 function Table({ data, location }) {
   const [showNameArrow, setShowNameArrow] = useState(true);
   const [showSizeArrow, setShowSizeArrow] = useState(false);
-  const [arrowDirection, setArrowDirection] = useState(false);
+  const [arrowDirection, setArrowDirection] = useState(true);
 
   const columnName = showNameArrow ? "name" : "sizeKb";
   const sortDirection = arrowDirection ? "up" : "down";

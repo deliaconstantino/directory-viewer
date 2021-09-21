@@ -31,13 +31,13 @@ describe("Table Component", () => {
 });
 
 describe("Sort Functionality", () => {
-  it("renders a down arrow on page load", () => {
+  it("renders an up arrow on page load", () => {
     const { getByTitle } = render(
       <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
         <Table data={tableData} location={locale} />
       </MemoryRouter>
     );
-    const svgTitle = getByTitle("arrowDown");
+    const svgTitle = getByTitle("arrowUp");
 
     expect(svgTitle).toBeTruthy();
   });
@@ -50,10 +50,10 @@ describe("Sort Functionality", () => {
         </MemoryRouter>
       );
 
-      const arrowDown = getByTitle("arrowDown");
-      await fireEvent.click(arrowDown);
       const arrowUp = getByTitle("arrowUp");
-      expect(arrowUp).toBeTruthy();
+      await fireEvent.click(arrowUp);
+      const arrowDown = getByTitle("arrowDown");
+      expect(arrowDown).toBeTruthy();
     });
   });
 
@@ -91,32 +91,7 @@ describe("Sort Functionality", () => {
     });
   });
 
-  it("sorts data by name in ascending order", async () => {
-    await act(async () => {
-      const { queryByTestId, queryAllByTestId, getByTitle } = render(
-        <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
-          <Table data={tableData} location={locale} />
-        </MemoryRouter>
-      );
-      const arrowDown = getByTitle("arrowDown");
-      await fireEvent.click(arrowDown);
-
-      const rowsInnerHTML = queryAllByTestId("nameValue").map(
-        (val) => val.innerHTML
-      );
-
-      const innerValues = [
-        "aaaa.go",
-        "another.go",
-        '<a class="text-blue-500 underline" href="/teleport/lib/undefined/sampleDir">sampleDir</a>',
-        "zebra.go",
-      ];
-
-      expect(rowsInnerHTML).toEqual(innerValues);
-    });
-  });
-
-  it("sorts data by name in descending order", () => {
+  it("sorts data by name in ascending order", () => {
     const { queryByTestId, queryAllByTestId, getByTitle } = render(
       <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
         <Table data={tableData} location={locale} />
@@ -128,13 +103,38 @@ describe("Sort Functionality", () => {
     );
 
     const innerValues = [
-      "zebra.go",
-      '<a class="text-blue-500 underline" href="/teleport/lib/undefined/sampleDir">sampleDir</a>',
-      "another.go",
       "aaaa.go",
+      "another.go",
+      '<a class="text-blue-500 underline" href="/teleport/lib/undefined/sampleDir">sampleDir</a>',
+      "zebra.go",
     ];
 
     expect(rowsInnerHTML).toEqual(innerValues);
+  });
+
+  it("sorts data by name in descending order", async () => {
+    await act(async () => {
+      const { queryByTestId, queryAllByTestId, getByTitle } = render(
+        <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
+          <Table data={tableData} location={locale} />
+        </MemoryRouter>
+      );
+      const arrowUp = getByTitle("arrowUp");
+      await fireEvent.click(arrowUp);
+
+      const rowsInnerHTML = queryAllByTestId("nameValue").map(
+        (val) => val.innerHTML
+      );
+
+      const innerValues = [
+        "zebra.go",
+        '<a class="text-blue-500 underline" href="/teleport/lib/undefined/sampleDir">sampleDir</a>',
+        "another.go",
+        "aaaa.go",
+      ];
+
+      expect(rowsInnerHTML).toEqual(innerValues);
+    });
   });
 
   it("sorts data by size in ascending order", async () => {
@@ -146,8 +146,6 @@ describe("Sort Functionality", () => {
       );
       const size = queryByTestId("size");
       await fireEvent.click(size);
-      const sizeArrow = queryByTestId("sizeArrow");
-      await fireEvent.click(sizeArrow);
       const rows = queryAllByTestId("sizeValue").map((val) => val.innerHTML);
 
       expect(rows).toEqual(["-", "520", "3320", "3520"]);
@@ -163,6 +161,8 @@ describe("Sort Functionality", () => {
       );
       const size = queryByTestId("size");
       await fireEvent.click(size);
+      const sizeArrow = queryByTestId("sizeArrow");
+      await fireEvent.click(sizeArrow);
       const rows = queryAllByTestId("sizeValue").map((val) => val.innerHTML);
 
       expect(rows).toEqual(["3520", "3320", "520", "-"]);
