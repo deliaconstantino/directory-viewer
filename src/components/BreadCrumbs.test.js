@@ -3,18 +3,7 @@ import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 describe("BreadCrumbs Component", () => {
-  it("renders a correct link when current url is short", () => {
-    const { getByRole } = render(
-      <MemoryRouter initialEntries={["/teleport"]}>
-        <BreadCrumbs pathParts={["teleport"]} />
-      </MemoryRouter>
-    );
-    const newTeleportLink = getByRole("link");
-
-    expect(newTeleportLink).toHaveAttribute("href", "/teleport");
-  });
-
-  it("renders all correct links when current url is long", () => {
+  it("renders links for each part of the path", () => {
     const { getAllByRole } = render(
       <MemoryRouter initialEntries={["/teleport/lib/newTeleport/sampleDir"]}>
         <BreadCrumbs
@@ -30,7 +19,5 @@ describe("BreadCrumbs Component", () => {
       "href",
       "/teleport/lib/newTeleport/sampleDir"
     );
-
-    expect(linkValues[1]).not.toHaveAttribute("href", "/teleport/lib/hi");
   });
 });
