@@ -46,9 +46,9 @@ function TableRow({ type, name, size, location }) {
   return (
     <tr data-testid="tableRow">
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        {imageSVG} <span>{nameValue}</span>
+        {imageSVG} <span data-testid="nameValue">{nameValue}</span>
       </td>
-      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+      <td data-testid="sizeValue" className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         {size ? size : "-"}
       </td>
     </tr>

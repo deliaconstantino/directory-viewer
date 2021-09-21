@@ -37,21 +37,33 @@ function Table({ data, location }) {
             <thead data-testid="tableHeader">
               <tr>
                 <th
+                  data-testid="name"
                   onClick={showNameArrowOnly}
                   className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50 w-4/12"
                 >
                   Name
                   {showNameArrow && (
-                    <span onClick={changeArrowDirection}>{arrowType}</span>
+                    <span
+                      data-testid="nameArrow"
+                      onClick={changeArrowDirection}
+                    >
+                      {arrowType}
+                    </span>
                   )}
                 </th>
                 <th
+                  data-testid="size"
                   onClick={showSizeArrowOnly}
                   className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50 w-4/12"
                 >
                   Size (Kb)
                   {showSizeArrow && (
-                    <span onClick={changeArrowDirection}>{arrowType}</span>
+                    <span
+                      data-testid="sizeArrow"
+                      onClick={changeArrowDirection}
+                    >
+                      {arrowType}
+                    </span>
                   )}
                 </th>
               </tr>

@@ -1,5 +1,5 @@
-export function sortBy(dataArr, sortDirection, keyName) {
-  const sortedArr = dataArr.slice();
+export function sortBy(data, sortDirection, keyName) {
+  const sortedArr = data.slice();
 
   if (sortDirection === "up") {
     if (keyName === "name") {
