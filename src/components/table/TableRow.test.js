@@ -8,7 +8,14 @@ const containerValue = { container: document.body.appendChild(tbody) };
 describe("TableRow Conponent", () => {
   it("renders row name", () => {
     const { getByText } = render(
-      <TableRow type="file" name="teleport" size={0} />,
+      <MemoryRouter initialEntries={["/"]}>
+        <TableRow
+          type="file"
+          name="teleport"
+          size={0}
+          location={{ pathname: "/" }}
+        />
+      </MemoryRouter>,
       containerValue
     );
     const name = getByText("teleport");
@@ -17,7 +24,14 @@ describe("TableRow Conponent", () => {
 
   it("renders size 0 as '-'", () => {
     const { getByText } = render(
-      <TableRow type="file" name="teleport" size={0} />,
+      <MemoryRouter initialEntries={["/"]}>
+        <TableRow
+          type="file"
+          name="teleport"
+          size={0}
+          location={{ pathname: "/" }}
+        />
+      </MemoryRouter>,
       containerValue
     );
     const size = getByText("-");
@@ -59,7 +73,14 @@ describe("TableRow Conponent", () => {
 
   it("renders file type with a file image SVG", () => {
     const { getByTitle } = render(
-      <TableRow type="file" name="teleport" size={0} />,
+      <MemoryRouter initialEntries={["/"]}>
+        <TableRow
+          type="file"
+          name="teleport"
+          size={0}
+          location={{ pathname: "/" }}
+        />
+      </MemoryRouter>,
       containerValue
     );
 
@@ -69,29 +90,29 @@ describe("TableRow Conponent", () => {
 
   it("renders a link for name value when type is directory", () => {
     const { getByRole } = render(
-      <MemoryRouter initialEntries={["/directory"]}>
+      <MemoryRouter initialEntries={["/"]}>
         <TableRow
           type="dir"
           name="teleport"
           size={123}
-          location={{ pathname: "/directory" }}
+          location={{ pathname: "/" }}
         />
       </MemoryRouter>,
       containerValue
     );
     const teleportLink = getByRole("link");
 
-    expect(teleportLink).toHaveAttribute("href", "/directory/teleport");
+    expect(teleportLink).toHaveAttribute("href", "/teleport");
   });
 
   it("renders a correct longer link for name value when type is directory", () => {
     const { getByRole } = render(
-      <MemoryRouter initialEntries={["/directory"]}>
+      <MemoryRouter initialEntries={["/"]}>
         <TableRow
           type="dir"
           name="newTeleport"
           size={123}
-          location={{ pathname: "/directory/teleport/lib" }}
+          location={{ pathname: "/teleport/lib" }}
         />
       </MemoryRouter>,
       containerValue
@@ -100,13 +121,20 @@ describe("TableRow Conponent", () => {
 
     expect(newTeleportLink).toHaveAttribute(
       "href",
-      "/directory/teleport/lib/newTeleport"
+      "/teleport/lib/newTeleport"
     );
   });
 
   it("does not render link for type file", () => {
     const { queryByRole } = render(
-      <TableRow type="file" name="teleport" size={0} />,
+      <MemoryRouter initialEntries={["/"]}>
+        <TableRow
+          type="file"
+          name="teleport"
+          size={0}
+          location={{ pathname: "/" }}
+        />
+      </MemoryRouter>,
       containerValue
     );
     const linkValue = queryByRole("link");
