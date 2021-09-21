@@ -15,7 +15,7 @@ function BreadCrumbs({ pathParts }) {
   }
 
   return (
-    <div className="flex flex-wrap ml-2">
+    <div className="flex flex-wrap ml-2" data-testid="breadcrumbs">
       {linkParts.map((link, idx) => (
         <span key={idx}>{link}</span>
       ))}
