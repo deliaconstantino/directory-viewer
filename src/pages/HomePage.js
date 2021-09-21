@@ -20,7 +20,7 @@ function HomePage() {
 
   return (
     <div className="m-10">
-      <BreadCrumbs />
+      <BreadCrumbs pathParts={pathParts} />
       <SearchBox />
       {hasErrorMessage ? (
         <NoMatchFound />
