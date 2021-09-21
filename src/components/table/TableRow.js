@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 
 function TableRow({ type, name, size, location }) {
+  console.log({ location });
+
   let nameValue;
   let imageSVG;
+  const urlValue = (location.pathname === "/") ? name : `${location.pathname}/${name}`;
   if (type === "dir") {
     nameValue = (
       <div className="text-blue-500 underline">
-        <Link to={`${location.pathname}/${name}`}>{name}</Link>
+        <Link to={urlValue}>{name}</Link>
       </div>
     );
 
