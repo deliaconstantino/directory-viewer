@@ -19,7 +19,7 @@ function HomePage() {
   }
 
   return (
-    <div className="m-10">
+    <div className="mt-10">
       <BreadCrumbs pathParts={pathParts} />
       <SearchBox />
       {hasErrorMessage ? (
