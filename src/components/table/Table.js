@@ -8,29 +8,24 @@ function Table({ data, location }) {
           <table className="min-w-full">
             <thead data-testid="tableHeader">
               <tr>
-                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"></th>
-                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50 w-4/12">
                   Name
                 </th>
-                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50 w-4/12">
                   Size (Kb)
                 </th>
               </tr>
             </thead>
             <tbody>
-              {data[0] &&
-                data.map((d, idx) => {
-                  return (
-                    <TableRow
-                      key={idx}
-                      name={d.name}
-                      size={d.sizeKb}
-                      type={d.type}
-                      items={d?.items}
-                      location={location}
-                    />
-                  );
-                })}
+              {data.map((d, idx) => (
+                <TableRow
+                  key={idx}
+                  name={d.name}
+                  size={d.sizeKb}
+                  type={d.type}
+                  location={location}
+                />
+              ))}
             </tbody>
           </table>
         </div>

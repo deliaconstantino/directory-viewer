@@ -1,4 +1,4 @@
-import Page from "./pages/Page.js";
+import HomePage from "./pages/HomePage.js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
       <h1 className="font-bold text-3xl text-gray-700">Directory Viewer</h1>
       <Router>
         <Route path="/">
-          <Page />
+          <HomePage />
         </Route>
       </Router>
     </div>

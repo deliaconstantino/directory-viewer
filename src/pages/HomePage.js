@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { searchDirectory } from "../lib/searchDirectory.js";
 import { useLocation } from "react-router-dom";
 import Table from "../components/table/Table.js";
@@ -6,35 +5,24 @@ import BreadCrumbs from "../components/BreadCrumbs.js";
 import SearchBox from "../components/SearchBox.js";
 import NoMatchFound from "../components/NoMatchFound.js";
 
-function Page() {
-  const [data, setData] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(false);
+function HomePage() {
   const location = useLocation();
   const pathParts = location.pathname.split("/").filter(Boolean);
-
-  useEffect(() => {
-    const searchReturn = searchDirectory(pathParts);
-    if (searchReturn) {
-      setData(searchReturn);
-      setErrorMessage(false);
-    } else {
-      setData(null);
-      setErrorMessage(true);
-    }
-  }, [pathParts]);
+  const directory = searchDirectory(pathParts);
+  const hasErrorMessage = !directory;
 
   let tableData = [];
-  if (data && data.length) {
-    tableData = data;
+  if (directory && directory.length) {
+    tableData = directory;
   } else {
-    tableData.push(data);
+    tableData.push(directory);
   }
 
   return (
     <div className="m-10">
       <BreadCrumbs />
       <SearchBox />
-      {errorMessage ? (
+      {hasErrorMessage ? (
         <NoMatchFound />
       ) : (
         <Table data={tableData} location={location} />
@@ -43,4 +31,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default HomePage;
