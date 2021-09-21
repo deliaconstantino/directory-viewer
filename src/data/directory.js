@@ -20,7 +20,7 @@ export const directory = {
               items: [
                 {
                   name: "cool.go",
-                  sizeKb: 320,
+                  sizeKb: 350,
                   type: "file",
                 },
                 {
@@ -28,11 +28,31 @@ export const directory = {
                   sizeKb: 3320,
                   type: "file",
                 },
+                {
+                  name: "zooks",
+                  sizeKb: 7,
+                  type: "file",
+                },
+                {
+                  name: "aaaa",
+                  sizeKb: 332000,
+                  type: "file",
+                },
               ],
+            },
+            {
+              name: "zebra.go",
+              sizeKb: 520,
+              type: "file",
             },
             {
               name: "another.go",
               sizeKb: 3320,
+              type: "file",
+            },
+            {
+              name: "aaaa.go",
+              sizeKb: 3520,
               type: "file",
             },
           ],
