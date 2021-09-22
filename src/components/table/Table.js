@@ -1,32 +1,25 @@
 import { useState } from "react";
 import TableRow from "./TableRow";
-import ArrowUp from "../icons/ArrowUp.js";
-import ArrowDown from "../icons/ArrowDown.js";
-import { sortBy } from "../../lib/sortBy.js";
+import ArrowUp from "../icons/ArrowUp";
+import ArrowDown from "../icons/ArrowDown";
+import { sortBy } from "../../lib/sortBy";
 
 function Table({ data, location }) {
-  const [showNameArrow, setShowNameArrow] = useState(true);
-  const [showSizeArrow, setShowSizeArrow] = useState(false);
+  const [sortedColumn, setSortedColumn] = useState("name");
   const [arrowDirection, setArrowDirection] = useState(true);
 
-  const columnName = showNameArrow ? "name" : "sizeKb";
+  const caseInsensitive = sortedColumn === "name" ? true : false;
   const sortDirection = arrowDirection ? "up" : "down";
-  const dataArr = sortBy(data, sortDirection, columnName);
+  const dataArr = sortBy(data, sortDirection, sortedColumn, caseInsensitive);
 
   const arrowType = arrowDirection ? <ArrowUp /> : <ArrowDown />;
 
-  function showNameArrowOnly() {
-    setShowNameArrow(true);
-    setShowSizeArrow(false);
-  }
-
-  function showSizeArrowOnly() {
-    setShowSizeArrow(true);
-    setShowNameArrow(false);
-  }
-
-  function changeArrowDirection() {
-    setArrowDirection(!arrowDirection);
+  function selectSortedColumn(column) {
+    if (sortedColumn !== column) {
+      setSortedColumn(column);
+    } else {
+      setArrowDirection(!arrowDirection);
+    }
   }
 
   return (
@@ -38,32 +31,22 @@ function Table({ data, location }) {
               <tr>
                 <th
                   data-testid="name"
-                  onClick={showNameArrowOnly}
+                  onClick={() => selectSortedColumn("name")}
                   className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50 w-4/12"
                 >
                   Name
-                  {showNameArrow && (
-                    <span
-                      data-testid="nameArrow"
-                      onClick={changeArrowDirection}
-                    >
-                      {arrowType}
-                    </span>
+                  {sortedColumn === "name" && (
+                    <span data-testid="nameArrow">{arrowType}</span>
                   )}
                 </th>
                 <th
                   data-testid="size"
-                  onClick={showSizeArrowOnly}
+                  onClick={() => selectSortedColumn("sizeKb")}
                   className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50 w-4/12"
                 >
                   Size (Kb)
-                  {showSizeArrow && (
-                    <span
-                      data-testid="sizeArrow"
-                      onClick={changeArrowDirection}
-                    >
-                      {arrowType}
-                    </span>
+                  {sortedColumn === "sizeKb" && (
+                    <span data-testid="sizeArrow">{arrowType}</span>
                   )}
                 </th>
               </tr>

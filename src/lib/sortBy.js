@@ -1,35 +1,14 @@
-export function sortBy(data, sortDirection, keyName) {
-  const sortedArr = data.slice();
+export function sortBy(data, sortDirection, keyName, caseInsensitive) {
+  const sortedArr = [...data];
 
-  if (sortDirection === "up") {
-    if (keyName === "name") {
-      sortedArr.sort(function (a, b) {
-        const elementA = a.name.toUpperCase();
-        const elementB = b.name.toUpperCase();
-        return elementA < elementB ? -1 : elementA > elementB ? 1 : 0;
-      });
-    } else {
-      sortedArr.sort(function (a, b) {
-        const numberA = a.sizeKb;
-        const numberB = b.sizeKb;
-        return numberA < numberB ? -1 : numberA > numberB ? 1 : 0;
-      });
-    }
-  } else {
-    if (keyName === "name") {
-      sortedArr.sort(function (a, b) {
-        const elementA = a.name.toUpperCase();
-        const elementB = b.name.toUpperCase();
-        return elementA > elementB ? -1 : elementA < elementB ? 1 : 0;
-      });
-    } else {
-      sortedArr.sort(function (a, b) {
-        const numberA = a.sizeKb;
-        const numberB = b.sizeKb;
-        return numberA > numberB ? -1 : numberA < numberB ? 1 : 0;
-      });
-    }
-  }
+  return sortedArr.sort((a, b) => {
+    const elementA = caseInsensitive ? a[keyName].toUpperCase() : a[keyName];
+    const elementB = caseInsensitive ? b[keyName].toUpperCase() : b[keyName];
 
-  return sortedArr;
+    if (sortDirection === "up") {
+      return elementA < elementB ? -1 : elementA > elementB ? 1 : 0;
+    } else {
+      return elementA > elementB ? -1 : elementA < elementB ? 1 : 0;
+    }
+  });
 }

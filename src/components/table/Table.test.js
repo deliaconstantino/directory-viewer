@@ -119,8 +119,8 @@ describe("Sort Functionality", () => {
           <Table data={tableData} location={locale} />
         </MemoryRouter>
       );
-      const arrowUp = getByTitle("arrowUp");
-      await fireEvent.click(arrowUp);
+      const name = queryByTestId("name");
+      await fireEvent.click(name);
 
       const rowsInnerHTML = queryAllByTestId("nameValue").map(
         (val) => val.innerHTML
@@ -161,8 +161,7 @@ describe("Sort Functionality", () => {
       );
       const size = queryByTestId("size");
       await fireEvent.click(size);
-      const sizeArrow = queryByTestId("sizeArrow");
-      await fireEvent.click(sizeArrow);
+      await fireEvent.click(size);
       const rows = queryAllByTestId("sizeValue").map((val) => val.innerHTML);
 
       expect(rows).toEqual(["3520", "3320", "520", "-"]);
