@@ -1,29 +1,33 @@
-import { render, act, fireEvent } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { act, fireEvent } from "@testing-library/react";
+import { renderWithRouter } from "../../test-utils";
 import Table from "./Table";
 
-const tableData = [
+const data = [
   { name: "sampleDir", sizeKb: 0, type: "dir", items: [] },
   { name: "zebra.go", sizeKb: 520, type: "file" },
   { name: "another.go", sizeKb: 3320, type: "file" },
   { name: "aaaa.go", sizeKb: 3520, type: "file" },
 ];
 
-const locale = {
+const location = {
   location: { pathname: "/teleport/lib/newTeleport" },
 };
 
+const initialEntries = ["/teleport/lib/newTeleport"];
+
 describe("Table Component", () => {
   it("renders the table header", () => {
-    const { getByTestId } = render(<Table data={[]} />);
+    const { getByTestId } = renderWithRouter(
+      <Table data={data} location={location} />,
+      initialEntries
+    );
     expect(getByTestId("tableHeader")).toHaveTextContent("NameSize (Kb)");
   });
 
   it("renders the correct amount of table rows", () => {
-    const { getAllByTestId } = render(
-      <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
-        <Table data={tableData} location={locale} />
-      </MemoryRouter>
+    const { getAllByTestId } = renderWithRouter(
+      <Table data={data} location={location} />,
+      initialEntries
     );
     const tableRowList = getAllByTestId("tableRow");
     expect(tableRowList.length).toBe(4);
@@ -32,10 +36,9 @@ describe("Table Component", () => {
 
 describe("Sort Functionality", () => {
   it("renders an up arrow on page load", () => {
-    const { getByTitle } = render(
-      <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
-        <Table data={tableData} location={locale} />
-      </MemoryRouter>
+    const { getByTitle } = renderWithRouter(
+      <Table data={data} location={location} />,
+      initialEntries
     );
     const svgTitle = getByTitle("arrowUp");
 
@@ -44,10 +47,9 @@ describe("Sort Functionality", () => {
 
   it("changes the arrow direction when clicked", async () => {
     await act(async () => {
-      const { getByTitle } = render(
-        <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
-          <Table data={tableData} location={locale} />
-        </MemoryRouter>
+      const { getByTitle } = renderWithRouter(
+        <Table data={data} location={location} />,
+        initialEntries
       );
 
       const arrowUp = getByTitle("arrowUp");
@@ -59,10 +61,9 @@ describe("Sort Functionality", () => {
 
   it("only shows name arrow when name is clicked", async () => {
     await act(async () => {
-      const { queryByTestId } = render(
-        <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
-          <Table data={tableData} location={locale} />
-        </MemoryRouter>
+      const { queryByTestId } = renderWithRouter(
+        <Table data={data} location={location} />,
+        initialEntries
       );
       const name = queryByTestId("name");
       await fireEvent.click(name);
@@ -74,30 +75,26 @@ describe("Sort Functionality", () => {
     });
   });
 
-  it("only shows size arrow when size is clicked", async () => {
-    await act(async () => {
-      const { queryByTestId } = render(
-        <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
-          <Table data={tableData} location={locale} />
-        </MemoryRouter>
-      );
-      const size = queryByTestId("size");
-      await fireEvent.click(size);
-      const sizeArrow = queryByTestId("sizeArrow");
-      const nameArrow = queryByTestId("nameArrow");
+  it("only shows size arrow when size is clicked", () => {
+    const { queryByTestId } = renderWithRouter(
+      <Table data={data} location={location} />,
+      initialEntries
+    );
+    const size = queryByTestId("size");
+    fireEvent.click(size);
 
-      expect(sizeArrow).toBeTruthy();
-      expect(nameArrow).toBeNull();
-    });
+    const sizeArrow = queryByTestId("sizeArrow");
+    const nameArrow = queryByTestId("nameArrow");
+
+    expect(sizeArrow).toBeTruthy();
+    expect(nameArrow).toBeNull();
   });
 
   it("sorts data by name in ascending order", () => {
-    const { queryByTestId, queryAllByTestId, getByTitle } = render(
-      <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
-        <Table data={tableData} location={locale} />
-      </MemoryRouter>
+    const { queryByTestId, queryAllByTestId, getByTitle } = renderWithRouter(
+      <Table data={data} location={location} />,
+      initialEntries
     );
-
     const rowsInnerHTML = queryAllByTestId("nameValue").map(
       (val) => val.innerHTML
     );
@@ -114,10 +111,9 @@ describe("Sort Functionality", () => {
 
   it("sorts data by name in descending order", async () => {
     await act(async () => {
-      const { queryByTestId, queryAllByTestId, getByTitle } = render(
-        <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
-          <Table data={tableData} location={locale} />
-        </MemoryRouter>
+      const { queryByTestId, queryAllByTestId, getByTitle } = renderWithRouter(
+        <Table data={data} location={location} />,
+        initialEntries
       );
       const name = queryByTestId("name");
       await fireEvent.click(name);
@@ -139,10 +135,9 @@ describe("Sort Functionality", () => {
 
   it("sorts data by size in ascending order", async () => {
     await act(async () => {
-      const { queryByTestId, queryAllByTestId, getByTitle } = render(
-        <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
-          <Table data={tableData} location={locale} />
-        </MemoryRouter>
+      const { queryByTestId, queryAllByTestId, getByTitle } = renderWithRouter(
+        <Table data={data} location={location} />,
+        initialEntries
       );
       const size = queryByTestId("size");
       await fireEvent.click(size);
@@ -154,10 +149,9 @@ describe("Sort Functionality", () => {
 
   it("sorts data by size in descending order", async () => {
     await act(async () => {
-      const { queryByTestId, queryAllByTestId, getByTitle } = render(
-        <MemoryRouter initialEntries={["/teleport/lib/newTeleport"]}>
-          <Table data={tableData} location={locale} />
-        </MemoryRouter>
+      const { queryByTestId, queryAllByTestId, getByTitle } = renderWithRouter(
+        <Table data={data} location={location} />,
+        initialEntries
       );
       const size = queryByTestId("size");
       await fireEvent.click(size);
