@@ -1,10 +1,12 @@
 import { directory } from "../data/directory";
 
 export function searchDirectory(urlArray) {
+  // console.log({urlArray})
   let parentLevel = directory;
 
   if (urlArray.length === 0) {
-    return parentLevel;
+    // return parentLevel;
+    return [parentLevel];
   }
 
   if (parentLevel.name !== urlArray[0]) return false;
