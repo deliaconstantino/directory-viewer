@@ -1,25 +1,16 @@
-import Teleport from "./pages/teleport/Teleport.js";
-import Home from "./pages/home/Home.js";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import HomePage from "./pages/HomePage.js";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
-      <div className="bg-indigo-200 shadow-md">
-        <Link className="underline" to="/">
-          Directory Viewer
-        </Link>
-      </div>
-
-      <Switch>
-        <Route path="/teleport">
-          <Teleport />
-        </Route>
+    <div className="container mx-auto m-10">
+      <h1 className="font-bold text-3xl text-gray-700">Directory Viewer</h1>
+      <Router>
         <Route path="/">
-          <Home />
+          <HomePage />
         </Route>
-      </Switch>
-    </Router>
+      </Router>
+    </div>
   );
 }
 
