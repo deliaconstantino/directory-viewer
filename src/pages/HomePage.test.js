@@ -6,94 +6,68 @@ import HomePage from "./HomePage";
 const existingPath = "/teleport/lib";
 const nonexistentPath = "/directory/teleport/teleport";
 
+function homePageWithRouter(historyProp) {
+  const history = createMemoryHistory();
+  history.push(historyProp);
+  return render(
+    <Router history={history}>
+        <HomePage />
+    </Router>
+  );
+}
+
+function homePageWithMemoryRouter(initalPath) {
+  return render(
+    <MemoryRouter initialEntries={[initalPath]}>
+      <HomePage/>
+    </MemoryRouter>
+  );
+}
+
 describe("HomePage Component", () => {
   it("finds data when the url pattern matches data in the directory", () => {
-    const history = createMemoryHistory();
-    history.push("/teleport/lib");
-    render(
-      <Router history={history}>
-        <HomePage />
-      </Router>
-    );
-
+    homePageWithRouter(existingPath);
     expect(screen.getByText("newTeleport")).toBeTruthy();
   });
 
   it("does not find data when the url pattern does not match data in the directory", () => {
-    const history = createMemoryHistory();
-    history.push("/teleport/teleport/lib/hello");
-    render(
-      <Router history={history}>
-        <HomePage />
-      </Router>
-    );
-
+    homePageWithRouter(nonexistentPath);
     expect(screen.getByText("No matching directories found.")).toBeTruthy();
   });
 
   it("renders a table when data is found", () => {
-    const { getByRole } = render(
-      <MemoryRouter initialEntries={[existingPath]}>
-        <HomePage />
-      </MemoryRouter>
-    );
+    const { getByRole } = homePageWithMemoryRouter(existingPath)
     const table = getByRole("table");
-
     expect(table).toBeTruthy();
   });
 
   it("does not render a table when data is not found", () => {
-    const { queryByRole } = render(
-      <MemoryRouter initialEntries={[nonexistentPath]}>
-        <HomePage />
-      </MemoryRouter>
-    );
+    const { queryByRole } = homePageWithMemoryRouter(nonexistentPath)
     const table = queryByRole("table");
-
     expect(table).toBeNull();
   });
 
   it("renders breadcrumbs when data is found", () => {
-    const { queryByTestId } = render(
-      <MemoryRouter initialEntries={[existingPath]}>
-        <HomePage />
-      </MemoryRouter>
-    );
+    const { queryByTestId } = homePageWithMemoryRouter(existingPath)
     const breadcrumbs = queryByTestId("breadcrumbs");
-
     expect(breadcrumbs).toBeTruthy();
   });
 
   it("does not render breadcrumbs when data is not found", () => {
-    const { queryByTestId } = render(
-      <MemoryRouter initialEntries={[nonexistentPath]}>
-        <HomePage />
-      </MemoryRouter>
-    );
+    const { queryByTestId } = homePageWithMemoryRouter(nonexistentPath)
     const breadcrumbs = queryByTestId("breadcrumbs");
-
     expect(breadcrumbs).toBeNull();
   });
 
   it("does not render 'No matching directories found.' when data is found", () => {
-    const { queryByText } = render(
-      <MemoryRouter initialEntries={[existingPath]}>
-        <HomePage />
-      </MemoryRouter>
-    );
+    const { queryByText } = homePageWithMemoryRouter(existingPath)
     const noMatch = queryByText("No matching directories found.");
-
     expect(noMatch).toBeNull();
   });
 
   it("renders 'No matching directories found.' when data is not found", () => {
-    const { getByText } = render(
-      <MemoryRouter initialEntries={[nonexistentPath]}>
-        <HomePage />
-      </MemoryRouter>
-    );
+    const { getByText } = homePageWithMemoryRouter(nonexistentPath)
     const noMatch = getByText("No matching directories found.");
-
     expect(noMatch).toBeTruthy();
   });
 });
