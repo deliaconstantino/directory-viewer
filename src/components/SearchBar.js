@@ -1,20 +1,19 @@
-import { useState } from "react";
+import MagnifyingGlass from "../components/icons/MagnifyingGlass";
 
-function SearchBar({ onSearchParamsChange }) {
-  const [searchValue, setSearchValue] = useState("");
-  //
-
-  function onSearchValueChange(e) {
-    setSearchValue(e.target.value);
-    onSearchParamsChange(e.target.value);
-  }
-
+function SearchBar({ onSearchParamsChange, searchValue }) {
   return (
-    <input
-      value={searchValue}
-      placeholder="search current directory..."
-      onChange={onSearchValueChange}
-    />
+    <div className="shadow flex flex mt-5 rounded-lg">
+      <div className="outline-none bg-gray-50 w-auto flex justify-end items-center p-2">
+        <MagnifyingGlass />
+      </div>
+      <input
+        className="px-2 w-full h-12 outline-none rounded-lg bg-gray-50 focus:bg-white"
+        type="text"
+        value={searchValue}
+        placeholder="search current directory..."
+        onChange={onSearchParamsChange}
+      />
+    </div>
   );
 }
 

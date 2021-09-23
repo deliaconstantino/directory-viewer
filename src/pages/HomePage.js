@@ -10,6 +10,7 @@ import NoMatchFound from "../components/NoMatchFound.js";
 function HomePage() {
   const [originalTableData, setOrginalTableData] = useState([]);
   const [tableData, setTableData] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   const location = useLocation();
 
   function getPathParts(locationObj) {
@@ -20,18 +21,26 @@ function HomePage() {
     const initialData = searchDirectory(getPathParts(location));
     setOrginalTableData(initialData);
     setTableData(initialData);
+    setSearchValue("");
   }, [location]);
 
-  function onSearchParamsChange(query) {
-    setTableData(searchCurrentDirectory(query, originalTableData))
+  function onSearchParamsChange(evt) {
+    const query = evt.target.value;
+    setSearchValue(query);
+    setTableData(searchCurrentDirectory(query, originalTableData));
   }
 
   return (
     <div className="mt-10">
-      {tableData && <BreadCrumbs pathParts={getPathParts(location)} />}
-      <SearchBar onSearchParamsChange={onSearchParamsChange} />
       {tableData ? (
-        <Table data={tableData} location={location} />
+        <>
+          <BreadCrumbs pathParts={getPathParts(location)} />
+          <SearchBar
+            onSearchParamsChange={onSearchParamsChange}
+            searchValue={searchValue}
+          />
+          <Table data={tableData} location={location} />
+        </>
       ) : (
         <NoMatchFound />
       )}
