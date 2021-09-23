@@ -12,7 +12,7 @@ function Table({ data, location }) {
   const sortDirection = arrowDirection ? "up" : "down";
   const dataArr = sortBy(data, sortDirection, sortedColumn, caseInsensitive);
 
-  const arrowType = arrowDirection ? <ArrowUp /> : <ArrowDown />;
+  const $arrow = arrowDirection ? <ArrowUp /> : <ArrowDown />;
 
   function selectSortedColumn(column) {
     if (sortedColumn !== column) {
@@ -36,7 +36,7 @@ function Table({ data, location }) {
                 >
                   Name
                   {sortedColumn === "name" && (
-                    <span data-testid="nameArrow">{arrowType}</span>
+                    <span data-testid="nameArrow">{$arrow}</span>
                   )}
                 </th>
                 <th
@@ -46,7 +46,7 @@ function Table({ data, location }) {
                 >
                   Size (Kb)
                   {sortedColumn === "sizeKb" && (
-                    <span data-testid="sizeArrow">{arrowType}</span>
+                    <span data-testid="sizeArrow">{$arrow}</span>
                   )}
                 </th>
               </tr>
