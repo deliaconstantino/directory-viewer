@@ -7,6 +7,7 @@ function SearchBar({ onSearchParamsChange, searchValue }) {
         <MagnifyingGlass />
       </div>
       <input
+        data-testid="searchInput"
         className="px-2 w-full h-12 outline-none rounded-lg bg-gray-50 focus:bg-white"
         type="text"
         value={searchValue}
