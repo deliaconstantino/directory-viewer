@@ -30,6 +30,7 @@ describe("HomePage Component", () => {
 
     expect(screen.getByText("No matching directories found.")).toBeTruthy();
   });
+
   it("renders a table when data is found", () => {
     const { getByRole } = render(
       <MemoryRouter initialEntries={[existingPath]}>
@@ -37,6 +38,7 @@ describe("HomePage Component", () => {
       </MemoryRouter>
     );
     const table = getByRole("table");
+
     expect(table).toBeTruthy();
   });
 
@@ -47,7 +49,30 @@ describe("HomePage Component", () => {
       </MemoryRouter>
     );
     const table = queryByRole("table");
+
     expect(table).toBeNull();
+  });
+
+  it("renders breadcrumbs when data is found", () => {
+    const { queryByTestId } = render(
+      <MemoryRouter initialEntries={[existingPath]}>
+        <HomePage />
+      </MemoryRouter>
+    );
+    const breadcrumbs = queryByTestId("breadcrumbs");
+
+    expect(breadcrumbs).toBeTruthy();
+  });
+
+  it("does not render breadcrumbs when data is not found", () => {
+    const { queryByTestId } = render(
+      <MemoryRouter initialEntries={[nonexistentPath]}>
+        <HomePage />
+      </MemoryRouter>
+    );
+    const breadcrumbs = queryByTestId("breadcrumbs");
+
+    expect(breadcrumbs).toBeNull();
   });
 
   it("does not render 'No matching directories found.' when data is found", () => {
@@ -57,6 +82,7 @@ describe("HomePage Component", () => {
       </MemoryRouter>
     );
     const noMatch = queryByText("No matching directories found.");
+
     expect(noMatch).toBeNull();
   });
 
@@ -67,6 +93,7 @@ describe("HomePage Component", () => {
       </MemoryRouter>
     );
     const noMatch = getByText("No matching directories found.");
+
     expect(noMatch).toBeTruthy();
   });
 });

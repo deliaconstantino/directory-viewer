@@ -19,13 +19,15 @@ function HomePage() {
   }
 
   return (
-    <div className="m-10">
-      <BreadCrumbs />
+    <div className="mt-10">
       <SearchBox />
       {hasErrorMessage ? (
         <NoMatchFound />
       ) : (
-        <Table data={tableData} location={location} />
+        <>
+          <BreadCrumbs pathParts={pathParts} />
+          <Table data={tableData} location={location} />
+        </>
       )}
     </div>
   );

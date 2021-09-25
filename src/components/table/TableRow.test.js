@@ -19,6 +19,7 @@ describe("TableRow Conponent", () => {
       containerValue
     );
     const name = getByText("teleport");
+
     expect(name).toBeTruthy();
   });
 
@@ -35,6 +36,7 @@ describe("TableRow Conponent", () => {
       containerValue
     );
     const size = getByText("-");
+
     expect(size).toBeTruthy();
   });
 
@@ -51,6 +53,7 @@ describe("TableRow Conponent", () => {
       containerValue
     );
     const size = getByText("123");
+
     expect(size).toBeTruthy();
   });
 
@@ -66,8 +69,8 @@ describe("TableRow Conponent", () => {
       </MemoryRouter>,
       containerValue
     );
-
     const svgTitle = getByTitle("folderIcon");
+
     expect(svgTitle).toBeTruthy();
   });
 
@@ -83,8 +86,8 @@ describe("TableRow Conponent", () => {
       </MemoryRouter>,
       containerValue
     );
-
     const svgTitle = getByTitle("fileIcon");
+
     expect(svgTitle).toBeTruthy();
   });
 
@@ -138,6 +141,7 @@ describe("TableRow Conponent", () => {
       containerValue
     );
     const linkValue = queryByRole("link");
+
     expect(linkValue).toBeNull();
   });
 });
