@@ -10,21 +10,20 @@ import NoMatchFound from "../components/NoMatchFound.js";
 function HomePage() {
   const location = useLocation();
   const [searchValue, setSearchValue] = useState("");
-  const [directoryWasFound, setDirectoryWasFound] = useState(true);
-  const [currentDirectory, setCurrentDirectory] = useState([]);
+
+  const [currentDirectory, directoryWasFound] = useMemo(
+    () => findDirectory(getPathParts(location)),
+    [location]
+  );
+
+  const filtered = useMemo(
+    () => searchCurrentDirectory(searchValue, currentDirectory),
+    [searchValue, currentDirectory]
+  );
 
   useEffect(() => {
-    const [initialData, directoryWasFoundResult] = findDirectory(
-      getPathParts(location)
-    );
-    setDirectoryWasFound(directoryWasFoundResult);
-    setCurrentDirectory(initialData);
     setSearchValue("");
   }, [location]);
-
-  const filtered = useMemo(() => {
-    return searchCurrentDirectory(searchValue, currentDirectory);
-  }, [searchValue, currentDirectory]);
 
   function getPathParts(locationObj) {
     return locationObj.pathname.split("/").filter(Boolean);
