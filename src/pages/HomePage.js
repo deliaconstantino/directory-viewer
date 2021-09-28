@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { findDirectory } from "../lib/findDirectory.js";
 import { searchCurrentDirectory } from "../lib/searchCurrentDirectory.js";
 import { useLocation } from "react-router-dom";
@@ -8,19 +8,20 @@ import SearchBar from "../components/SearchBar.js";
 import NoMatchFound from "../components/NoMatchFound.js";
 
 function HomePage() {
-  const [originalTableData, setOrginalTableData] = useState([]);
-  const [tableData, setTableData] = useState([]);
-  const [directoryWasFound, setDirectoryWasFound] = useState(true);
-  const [searchValue, setSearchValue] = useState("");
   const location = useLocation();
+  const [searchValue, setSearchValue] = useState("");
+
+  const [currentDirectory, directoryWasFound] = useMemo(
+    () => findDirectory(getPathParts(location)),
+    [location]
+  );
+
+  const filtered = useMemo(
+    () => searchCurrentDirectory(searchValue, currentDirectory),
+    [searchValue, currentDirectory]
+  );
 
   useEffect(() => {
-    const [initialData, directoryWasFoundResult] = findDirectory(
-      getPathParts(location)
-    );
-    setOrginalTableData(initialData);
-    setTableData(initialData);
-    setDirectoryWasFound(directoryWasFoundResult);
     setSearchValue("");
   }, [location]);
 
@@ -29,9 +30,7 @@ function HomePage() {
   }
 
   function onSearchParamsChange(evt) {
-    const query = evt.target.value;
-    setSearchValue(query);
-    setTableData(searchCurrentDirectory(query, originalTableData));
+    setSearchValue(evt.target.value);
   }
 
   return (
@@ -43,7 +42,7 @@ function HomePage() {
             onSearchParamsChange={onSearchParamsChange}
             searchValue={searchValue}
           />
-          <Table data={tableData} location={location} />
+          <Table data={filtered} location={location} />
         </>
       ) : (
         <NoMatchFound />
