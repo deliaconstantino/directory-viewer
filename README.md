@@ -1,6 +1,6 @@
 # Directory Viewer
 
-An application that allows a user to browse directory content.
+Directory Viewer allows a user to browse directory content, with a UX that is loosely based on Google Drive. It's built with React, React-Router, Tailwind CSS, and React Testing Library.
 
 ## Configuration
 
