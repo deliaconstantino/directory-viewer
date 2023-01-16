@@ -1,6 +1,6 @@
 # Directory Viewer
 
-Directory Viewer allows a user to browse, search, and filter directory content, with a UX that is loosely based on Google Drive.
+Directory Viewer allows a user to browse, sort, and filter directory content, with a UX that is loosely based on Google Drive.
 
 ## Demo
 
